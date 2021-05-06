@@ -38,6 +38,7 @@ namespace Task03
         {
             try
             {
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
                 if (!int.TryParse(Console.ReadLine(), out int N) || N < 0)
                     throw new ArgumentException();
                 Person[] people = new Person[N];
@@ -80,10 +81,10 @@ namespace Task03
 
         public int CompareTo(Person other)
         {
-            return this.firstName.CompareTo(other.firstName);
+            return (firstName+lastName).CompareTo(other.firstName+other.lastName);
         }
 
-        public override string ToString() => $"{firstName} {lastName[0]}.";
+        public override string ToString() => $"{firstName} {char.ToUpper(lastName[0])}.";
     }
 
 
