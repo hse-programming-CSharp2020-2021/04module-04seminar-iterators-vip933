@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +24,8 @@ namespace Task01
         {
             try
             {
-                int value = 
+                if (!int.TryParse(Console.ReadLine(), out int value))
+                    throw new ArgumentException();
                 foreach (int el in Fibonacci(value))
                 {
                     Console.Write(el + " ");
@@ -38,7 +39,16 @@ namespace Task01
 
         public static IEnumerable<int> Fibonacci(int maxValue)
         {
-           
+            int c1 = 1;
+            int c2 = 1;
+            yield return c1;
+            while (c2 <= maxValue)
+            {
+                yield return c2;
+                int m = c2;
+                c2 += c1;
+                c1 = m;
+            }
         }
     }
 }
