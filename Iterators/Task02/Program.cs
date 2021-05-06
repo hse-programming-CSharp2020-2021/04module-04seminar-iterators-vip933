@@ -43,7 +43,7 @@ namespace Task02
         public IEnumerator<String> GetEnumerator()
         {
             List<string> list = new List<string>();
-            list.AddRange(values.ToList().GetRange(start-1, Ien - start+1));
+            list.AddRange(values.ToList().GetRange(start-1, values.Length - start+1));
             foreach (string el in list)
                 yield return el;
             for (int i = 0; i < start - 1; i++)
@@ -55,8 +55,6 @@ namespace Task02
             return GetEnumerator();
         }
 
-        public int Ien => values.Length;
-
     }
 
     class Program
@@ -67,7 +65,11 @@ namespace Task02
             {
                 if (!int.TryParse(Console.ReadLine(), out int startingIndex) || startingIndex <=0)
                     throw new ArgumentException();
-                string[] values = Console.ReadLine().Split();
+                List<string> ls = new List<string>();
+                foreach (string el in Console.ReadLine().Split())
+                    if (el != null)
+                        ls.Add(el);
+                string[] values = ls.ToArray();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");
