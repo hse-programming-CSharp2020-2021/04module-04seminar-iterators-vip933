@@ -67,8 +67,13 @@ namespace Task02
                     throw new ArgumentException();
                 List<string> ls = new List<string>();
                 foreach (string el in Console.ReadLine().Split())
-                    if (el != null)
+                {
+                    string c = el;
+                    if (el != null || c.Replace(" ", string.Empty).Length > 0)
+                    {
                         ls.Add(el);
+                    }
+                }
                 string[] values = ls.ToArray();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
