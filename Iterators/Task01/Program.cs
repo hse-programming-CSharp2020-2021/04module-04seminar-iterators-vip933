@@ -24,7 +24,7 @@ namespace Task01
         {
             try
             {
-                if (!int.TryParse(Console.ReadLine(), out int value))
+                if (!int.TryParse(Console.ReadLine(), out int value) || value <=0)
                     throw new ArgumentException();
                 foreach (int el in Fibonacci(value))
                 {
