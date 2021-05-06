@@ -45,21 +45,9 @@ namespace Task02
             List<string> list = new List<string>();
             list.AddRange(values.ToList().GetRange(start-1, values.Length - start+1));
             foreach (string el in list)
-            {
-                string c = el;
-                if (el != null || c.Replace(" ", string.Empty).Length > 0)
-                {
-                    yield return el;
-                }
-            }    
+                yield return el;
             for (int i = 0; i < start - 1; i++)
-            {
-                string c = values[i];
-                if (c != null || c.Replace(" ", string.Empty).Length > 0)
-                {
-                    yield return values[i];
-                }
-            }
+                yield return values[i];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -79,14 +67,9 @@ namespace Task02
                     throw new ArgumentException();
                 List<string> ls = new List<string>();
                 foreach (string el in Console.ReadLine().Split())
-                {
-                    string c = el;
-                    if (el != null || c.Replace(" ", string.Empty).Length > 0)
-                    {
+                    if (!string.IsNullOrWhiteSpace(el))
                         ls.Add(el);
-                    }
-                }
-                string[] values = ls.ToArray();
+                string[] values = Console.ReadLine().Split();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");
