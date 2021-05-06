@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
+using System.Linq;
 
 /* На вход подается число N.
  * На каждой из следующих N строках записаны ФИО человека, 
@@ -37,15 +38,26 @@ namespace Task03
         {
             try
             {
-                int N =
+                if (!int.TryParse(Console.ReadLine(), out int N) || N < 0)
+                    throw new ArgumentException();
                 Person[] people = new Person[N];
+                Person[] people2 = new Person[N];
+                for (int i = 0; i< N; i++)
+                {
+                    string[] c = Console.ReadLine().Split();
+                    people[i] = new Person(c[0], c[1]);
+                    people2[i] = new Person(c[0], c[1]);
+                }
 
                 People peopleList = new People(people);
-
-                foreach (Person p in peopleList)
-                    Console.WriteLine(p);
+                People peopleList2 = new People(people2);
 
                 foreach (Person p in peopleList.GetPeople)
+                    Console.WriteLine(p);
+
+                Console.WriteLine();
+
+                foreach (Person p in peopleList2)
                     Console.WriteLine(p);
             }
             catch (ArgumentException)
@@ -55,7 +67,7 @@ namespace Task03
         }
     }
 
-    public class Person
+    public class Person: IComparable<Person>
     {
         public string firstName;
         public string lastName;
@@ -66,7 +78,12 @@ namespace Task03
             this.lastName = lastName;
         }
 
-    
+        public int CompareTo(Person other)
+        {
+            return this.firstName.CompareTo(other.firstName);
+        }
+
+        public override string ToString() => $"{firstName} {lastName[0]}.";
     }
 
 
@@ -75,11 +92,18 @@ namespace Task03
         private Person[] _people;
         public Person[] GetPeople
         {
-            get {
+            get
+            {
+                Array.Sort(_people);
                 return _people;
             }
         }
-        
+
+        public People(Person[] people)
+        {
+            this._people = people;
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -90,27 +114,41 @@ namespace Task03
             return new PeopleEnum(_people);
         }
     }
-    
+
     public class PeopleEnum : IEnumerator
     {
         public Person[] _people;
-
-      
+        int position = -1;
+        public PeopleEnum(Person[] people)
+        {
+            this._people = people;
+        }
 
         public bool MoveNext()
         {
-            
+            if (position < _people.Length - 1)
+            {
+                position++;
+                return true;
+            }
+            else
+                return false;
         }
 
         public void Reset()
         {
-            
+            position = -1;
         }
-       
 
-        public Person Current
+
+        public object Current
         {
-            
+            get
+            {
+                if (position == -1 || position >= _people.Length)
+                    throw new ArgumentException();
+                return _people[position];
+            }
         }
     }
 }
