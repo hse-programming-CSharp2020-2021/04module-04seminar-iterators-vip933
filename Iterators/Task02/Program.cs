@@ -45,7 +45,13 @@ namespace Task02
             List<string> list = new List<string>();
             list.AddRange(values.ToList().GetRange(start-1, values.Length - start+1));
             foreach (string el in list)
-                yield return el;
+            {
+                string c = el;
+                if (el != null || c.Replace(" ", string.Empty).Length > 0)
+                {
+                    yield return el;
+                }
+            }    
             for (int i = 0; i < start - 1; i++)
                 yield return values[i];
         }
