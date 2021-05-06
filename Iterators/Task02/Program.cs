@@ -53,7 +53,13 @@ namespace Task02
                 }
             }    
             for (int i = 0; i < start - 1; i++)
-                yield return values[i];
+            {
+                string c = values[i];
+                if (c != null || c.Replace(" ", string.Empty).Length > 0)
+                {
+                    yield return values[i];
+                }
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
