@@ -69,7 +69,7 @@ namespace Task02
                 foreach (string el in Console.ReadLine().Split())
                     if (!string.IsNullOrWhiteSpace(el))
                         ls.Add(el);
-                string[] values = Console.ReadLine().Split();
+                string[] values = ls.ToArray();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");
