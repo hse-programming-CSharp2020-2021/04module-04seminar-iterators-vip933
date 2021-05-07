@@ -81,10 +81,13 @@ namespace Task03
 
         public int CompareTo(Person other)
         {
+            if (firstName.Length > other.firstName.Length)
+                return 1;
+            if (firstName.Length < other.firstName.Length)
+                return -1;
             return (firstName+lastName).CompareTo(other.firstName+other.lastName);
         }
-
-        public override string ToString() => $"{firstName} {char.ToUpper(lastName[0])}.";
+        public override string ToString() => $"{char.ToUpper(firstName[0])}{firstName.Substring(1)} {char.ToUpper(lastName[0])}.";
     }
 
 
