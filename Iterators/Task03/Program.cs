@@ -38,6 +38,7 @@ namespace Task03
         {
             try
             {
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
                 if (!int.TryParse(Console.ReadLine(), out int N) || N < 0)
                     throw new ArgumentException();
