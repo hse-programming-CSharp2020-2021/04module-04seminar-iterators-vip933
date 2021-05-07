@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 
 /* На вход подается число N.
@@ -27,7 +27,9 @@ namespace Task04
         {
             try
             {
-                int value = 
+                if (!int.TryParse(Console.ReadLine(), out int value) || value < 1)
+                    throw new ArgumentException();
+
                 MyInts myInts = new MyInts();
                 IEnumerator enumerator = myInts.MyEnumerator(value);
 
@@ -39,23 +41,61 @@ namespace Task04
             {
                 Console.WriteLine("error");
             }
-            
+
         }
 
         static void IterateThroughEnumeratorWithoutUsingForeach(IEnumerator enumerator)
         {
+            while (enumerator.MoveNext())
+            {
+                Console.Write($"{enumerator.Current} ");
+            }
         }
     }
 
     class MyInts : IEnumerator // НЕ МЕНЯТЬ ЭТУ СТРОКУ
     {
-        
+        int stop;
+        int position = 0;
+
+        public IEnumerator MyEnumerator(int value)
+        {
+            this.stop = value;
+            return GetEnumerator();
+        }
+
+        public MyInts GetEnumerator()
+        {
+            return this;
+        }
+
         public bool MoveNext()
         {
+            if (position < stop)
+            {
+                position++;
+                return true;
+            }
+            else
+            {
+                position = 0;
+                return false;
+            }
         }
 
         public object Current
         {
+            get
+            {
+                if (position == 0 || position > stop)
+                    throw new ArgumentException();
+                return position * position;
+            }
+        }
+
+        public void Reset()
+        {
+            position = 0;
         }
     }
 }
