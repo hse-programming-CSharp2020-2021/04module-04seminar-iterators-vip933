@@ -36,7 +36,7 @@ namespace Task03
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.GetEncoding(1251);
+            Console.OutputEncoding = System.Text.Encoding.GetEncoding("Windows-1251");
             try
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
