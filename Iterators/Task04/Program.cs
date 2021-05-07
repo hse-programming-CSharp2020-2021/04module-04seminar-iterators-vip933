@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text;
 
 /* На вход подается число N.
  * Нужно создать коллекцию из N квадратов последовательного ряда натуральных чисел 
@@ -46,10 +47,12 @@ namespace Task04
 
         static void IterateThroughEnumeratorWithoutUsingForeach(IEnumerator enumerator)
         {
+            StringBuilder sb = new StringBuilder();
             while (enumerator.MoveNext())
             {
-                Console.Write($"{enumerator.Current} ");
+                sb.Append($"{enumerator.Current} ");
             }
+            Console.Write(sb.Remove(sb.Length-1, 1));
         }
     }
 
