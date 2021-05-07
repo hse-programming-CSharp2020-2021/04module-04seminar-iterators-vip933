@@ -46,6 +46,8 @@ namespace Task03
                 for (int i = 0; i< N; i++)
                 {
                     string[] c = Console.ReadLine().Split();
+                    if (c.Length < 2)
+                        throw new ArgumentException();
                     people[i] = new Person(c[0], c[1]);
                     people2[i] = new Person(c[0], c[1]);
                 }
