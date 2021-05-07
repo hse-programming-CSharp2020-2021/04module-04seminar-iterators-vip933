@@ -36,10 +36,10 @@ namespace Task03
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.ASCII;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             try
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
                 if (!int.TryParse(Console.ReadLine(), out int N) || N < 0)
                     throw new ArgumentException();
                 Person[] people = new Person[N];
