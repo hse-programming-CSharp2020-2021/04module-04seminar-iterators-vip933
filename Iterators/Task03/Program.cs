@@ -36,7 +36,7 @@ namespace Task03
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.Default;
+            Console.OutputEncoding = System.Text.Encoding.ASCII;
             try
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ru-RU");
